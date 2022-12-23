@@ -19,5 +19,7 @@
         public string VacineList { get; set; }
 
         public string WorkPlace { get; set; }
+
+        public IEnumerable<DoctorPatient> DoctorsPatients { get; set; }
     }
 }

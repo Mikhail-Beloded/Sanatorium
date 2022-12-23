@@ -1,8 +1,12 @@
 ﻿namespace Sanatorium.DAL.Entities
 {
-    public class ProcedureReciept : EntityBase
+    public class ProcedureReciept
     {
+        public int ProcedureId { get; set; }
+
         public Procedure Procedure { get; set; }
+
+        public int RecieptId { get; set; }
 
         public Reciept Reciept { get; set; }
 

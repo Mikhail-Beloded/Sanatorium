@@ -11,7 +11,7 @@ namespace Sanatorium.DAL.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = SanatoriumDB; Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer("workstation id=SanatoriymDb.mssql.somee.com;packet size=4096;user id=MykhailoBilodid_SQLLogin_1;pwd=e26jbwq1hh;data source=SanatoriymDb.mssql.somee.com;persist security info=False;initial catalog=SanatoriymDb");
         }
 
         public DbSet<Doctor> Doctors { get; set; }
