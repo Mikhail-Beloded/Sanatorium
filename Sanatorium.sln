@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanatorium.DAL", "Sanatorium.DAL\Sanatorium.DAL.csproj", "{10B3A054-6DF5-4D54-8A69-7D3CC9D93A14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sanatorium.BLL", "Sanatorium.BLL\Sanatorium.BLL.csproj", "{5A7A67F4-3236-4353-9F57-BD0D50DC7B48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{10B3A054-6DF5-4D54-8A69-7D3CC9D93A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B3A054-6DF5-4D54-8A69-7D3CC9D93A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B3A054-6DF5-4D54-8A69-7D3CC9D93A14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7A67F4-3236-4353-9F57-BD0D50DC7B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7A67F4-3236-4353-9F57-BD0D50DC7B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7A67F4-3236-4353-9F57-BD0D50DC7B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7A67F4-3236-4353-9F57-BD0D50DC7B48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

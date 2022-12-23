@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sanatorium.BLL.DTOs
+﻿namespace Sanatorium.BLL.DTOs
 {
-    internal class ProcedureRecieptDto
+    public class ProcedureRecieptDto
     {
+        public int DoneProceduresCount { get; set; }
     }
 }
