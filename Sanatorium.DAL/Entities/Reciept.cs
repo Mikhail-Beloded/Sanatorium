@@ -9,5 +9,7 @@
         public string Type { get; set; }
 
         public Patient Patient { get; set; }
+
+        public List<ProcedureReciept> ProcedureReciept { get; set; }
     }
 }

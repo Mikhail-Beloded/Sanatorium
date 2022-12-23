@@ -7,5 +7,9 @@
         public int SessionPrice { get; set; }
 
         public TimeOnly SessionTime { get; set; }
+
+        public List<ProcedureIllness> ProcedureIllness { get; set; }
+
+        public List<ProcedureReciept> ProcedureReciept { get; set; }
     }
 }

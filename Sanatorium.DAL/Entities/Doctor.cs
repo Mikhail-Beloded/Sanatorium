@@ -11,5 +11,7 @@
         public string PhoneNumver { get; set; }
 
         public string Specialization { get; set; }
+
+        public IEnumerable<DoctorPatient> DoctorsPatients { get; set; }
     }
 }
