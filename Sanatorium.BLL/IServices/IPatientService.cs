@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sanatorium.BLL.DTOs;
 
 namespace Sanatorium.BLL.IServices
 {
-    internal class IPatientService
+    public interface IPatientService
     {
+        Task AddPateintAsync(PatientDto patientDto, CancellationToken cancellationToken);
+
+        Task RemovePateintAsync(int id, CancellationToken cancellationToken);
+
+        Task<PatientDto> GetOnePatientAsync(int id, CancellationToken cancellationToken);
     }
 }

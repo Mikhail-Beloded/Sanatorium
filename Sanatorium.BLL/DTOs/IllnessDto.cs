@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sanatorium.BLL.DTOs
+﻿namespace Sanatorium.BLL.DTOs
 {
-    internal class IllnessDto
+    public class IllnessDto
     {
+        public string Name { get; set; }
+
+        public string Type { get; set; }
+
+        public List<IllnessPatientDto> IllnessPatients { get; set; }
+
+        public List<ProcedureIllnessDto> ProcedureIllness { get; set; }
     }
 }

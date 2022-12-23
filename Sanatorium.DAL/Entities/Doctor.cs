@@ -12,6 +12,6 @@
 
         public string Specialization { get; set; }
 
-        public IEnumerable<DoctorPatient> DoctorsPatients { get; set; }
+        public List<DoctorPatient> DoctorPatient { get; set; }
     }
 }

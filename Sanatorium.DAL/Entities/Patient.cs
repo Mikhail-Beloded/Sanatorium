@@ -20,6 +20,10 @@
 
         public string WorkPlace { get; set; }
 
-        public IEnumerable<DoctorPatient> DoctorsPatients { get; set; }
+        public List<DoctorPatient> DoctorPatient { get; set; }
+
+        public List<IllnessPatient> IllnessPatient { get; set;}
+
+        public List<RoomPatient> RoomPatient { get; set; }
     }
 }
