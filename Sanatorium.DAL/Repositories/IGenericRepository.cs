@@ -18,7 +18,7 @@ namespace Sanatorium.DAL.Repositories
 
         Task<PagedList<TEntity>> GetPageAsync(PageParameters parameters, Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
-        Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAll();
     }
 
 }

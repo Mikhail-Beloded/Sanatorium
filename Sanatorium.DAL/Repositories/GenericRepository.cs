@@ -31,7 +31,7 @@ namespace Sanatorium.DAL.Repositories
             await _db.SaveChangesAsync(cancellationToken);
         }
 
-        public Task<List<TEntity>> GetAllAsync()
+        public Task<List<TEntity>> GetAll()
         {
             return  _table.AsNoTracking().ToListAsync();
         }
