@@ -5,13 +5,27 @@ namespace Sanatorium.DAL.Context
 {
     public class EFContext : DbContext
     {
-        public EFContext() { }
+        public EFContext()
+        {
+        }
 
-        public EFContext(DbContextOptions options) : base(options) { }
+        public EFContext(DbContextOptions<EFContext> options)
+    : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("workstation id=SanatoriymDb.mssql.somee.com;packet size=4096;user id=MykhailoBilodid_SQLLogin_1;pwd=e26jbwq1hh;data source=SanatoriymDb.mssql.somee.com;persist security info=False;initial catalog=SanatoriymDb");
+            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = SanatoriumDB; Trusted_Connection = True; TrustServerCertificate = true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DoctorPatient>().HasKey(x => new { x.PatientId, x.DoctorId });
+            modelBuilder.Entity<IllnessPatient>().HasKey(x => new { x.IllnessId, x.PatientId });
+            modelBuilder.Entity<ProcedureIllness>().HasKey(x => new { x.ProcedureId, x.IllnessId });
+            modelBuilder.Entity<ProcedureReciept>().HasKey(x => new { x.ProcedureId, x.RecieptId });
+            modelBuilder.Entity<RoomPatient>().HasKey(x => new { x.PatientId, x.RoomId });
         }
 
         public DbSet<Doctor> Doctors { get; set; }

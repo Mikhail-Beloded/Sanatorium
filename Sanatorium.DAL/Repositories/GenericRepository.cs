@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sanatorium.DAL.Context;
 using Sanatorium.DAL.Entities;
+using Sanatorium.DAL.Paging;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 
 namespace Sanatorium.DAL.Repositories
 {
@@ -28,9 +31,45 @@ namespace Sanatorium.DAL.Repositories
             await _db.SaveChangesAsync(cancellationToken);
         }
 
+        public Task<List<TEntity>> GetAll()
+        {
+            return  _table.AsNoTracking().ToListAsync();
+        }
+
         public async Task<TEntity?> GetOneAsync(int id, CancellationToken cancellationToken)
         {
             return await _table.FirstOrDefaultAsync<TEntity>(entity => entity.Id == id, cancellationToken);
+        }
+
+        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters parameters, CancellationToken cancellationToken)
+        {
+            var entities = await this._table
+                                     .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                                     .Take(parameters.PageSize)
+                                     .ToListAsync(cancellationToken);
+
+            var count = await this._table.CountAsync(cancellationToken);
+
+            return new PagedList<TEntity>(entities, parameters, count);
+        }
+
+        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters parameters, Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            var entities = await this._table
+                                     .Where(predicate)
+                                     .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                                     .Take(parameters.PageSize)
+                                     .ToListAsync(cancellationToken);
+
+            var count = await this._table.CountAsync(cancellationToken);
+
+            return new PagedList<TEntity>(entities, parameters, count);
+        }
+
+        public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            _table.Update(entity);
+            await _db.SaveChangesAsync(cancellationToken);
         }
     }
 }

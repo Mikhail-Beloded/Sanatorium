@@ -1,23 +1,50 @@
 ﻿using Sanatorium.BLL.DTOs;
 using Sanatorium.BLL.IServices;
+using Sanatorium.BLL.Maping;
+using Sanatorium.DAL.Entities;
+using Sanatorium.DAL.Paging;
+using Sanatorium.DAL.Repositories;
 
 namespace Sanatorium.BLL.Services
 {
     public class PatientService : IPatientService
     {
-        public Task AddPateintAsync(PatientDto patientDto, CancellationToken cancellationToken)
+        private readonly IGenericRepository<Patient> _repository;
+
+        private readonly Mapper _mapper = new Mapper();
+
+        public PatientService(IGenericRepository<Patient> repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public Task<PatientDto> GetOnePatientAsync(int id, CancellationToken cancellationToken)
+        public async Task AddPateintAsync(PatientDto patientDto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = _mapper.MapFromDto(patientDto);
+            await _repository.AddAsync(entity, cancellationToken);
         }
 
-        public Task RemovePateintAsync(int id, CancellationToken cancellationToken)
+        public async Task<PatientDto> GetOnePatientAsync(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = await _repository.GetOneAsync(id, cancellationToken);
+            if(entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+            return _mapper.MapToDto(entity);
+        }
+
+        public async Task<PagedList<PatientDto>> GetPagePatientAsync(PageParameters pageParameters, CancellationToken cancellationToken)
+        {
+            var entities = await _repository.GetPageAsync(pageParameters, cancellationToken);
+            var dtos = _mapper.MapToDto(entities);
+            return dtos;
+        }
+
+        public async Task RemovePateintAsync(int id, CancellationToken cancellationToken)
+        {
+            var entity = await _repository.GetOneAsync(id, cancellationToken);
+            await _repository.DeleteAsync(entity, cancellationToken);
         }
     }
 }

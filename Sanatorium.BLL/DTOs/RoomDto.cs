@@ -1,6 +1,6 @@
 ﻿namespace Sanatorium.BLL.DTOs
 {
-    public class RoomDto
+    public class RoomDto : DtoBase
     {
         public double Price { get; set; }
 

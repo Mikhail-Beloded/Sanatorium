@@ -1,6 +1,6 @@
 ﻿namespace Sanatorium.BLL.DTOs
 {
-    public class RecieptDto
+    public class RecieptDto : DtoBase
     {
         public DateTime CreateDate { get; set; }
 

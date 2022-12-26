@@ -1,6 +1,6 @@
 ﻿namespace Sanatorium.BLL.DTOs
 {
-    public class ProcedureRecieptDto
+    public class ProcedureRecieptDto : DtoBase 
     {
         public int DoneProceduresCount { get; set; }
     }

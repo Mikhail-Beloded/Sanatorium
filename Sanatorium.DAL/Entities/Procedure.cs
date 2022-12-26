@@ -6,7 +6,7 @@
 
         public int SessionPrice { get; set; }
 
-        public TimeOnly SessionTime { get; set; }
+        public DateTime SessionTime { get; set; }
 
         public List<ProcedureIllness> ProcedureIllness { get; set; }
 
