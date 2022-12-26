@@ -1,0 +1,55 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model Sanatorium.DAL.Paging.PagedList<PatientDto>
+
+@{
+    ViewData["Title"] = "Administrator Main Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="text-center">
+    <h1 class="display-4">Пацієнти</h1>
+</div>
+
+<div class="d-flex justify-content-end">
+    <a href="/Home/AddPatient" class="btn rounded-circle btn-dark"><i class="fa fa-plus"></i></a>
+</div>
+
+<div>
+    <h1></h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Ім'я</th>
+        <th>Вік</th>
+        <th>Стать</th>
+        <th>Адреса</th>
+        <th>Номер телефону</th>
+        <th>Електронна пошта</th>
+        <th>Дата реєстрації</th>
+        <th>Список вакцин</th>
+        <th>Робота</th>
+        <th>Редагувати</th>
+        <th>Видалити</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.FullName</td>
+            <td>@{
+                    DateTime.Now.Date.Subtract(d.BirthDate.Date).ToString();
+                }</td>
+            <td>@d.Gender</td>
+            <td>@d.Address</td>
+            <td>@d.PhoneNumber</td>
+            <td>@d.Email</td>
+            <td>@d.RegistrationDate.ToString()</td>
+            <td>@d.VacineList</td>
+            <td>@d.WorkPlace</td>
+            <td><a href="/Administrator/UpdatePatient/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-edit" style="font-size:24px"></i></a></td>
+            <td><a href="/Home/DeletePatient/@d.Id.ToString()" style="width: 50px" class="btn btn-danger"><i class="fa fa-trash-o" style="font-size:24px"></i></a></td>
+        </tr>
+    }
+</table>

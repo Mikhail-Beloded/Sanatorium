@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Sanatorium.BLL.DTOs;
 using Sanatorium.DAL.Entities;
+using Sanatorium.DAL.Paging;
 
 namespace Sanatorium.BLL.Maping
 {
@@ -40,6 +41,20 @@ namespace Sanatorium.BLL.Maping
 
         }).CreateMapper();
 
+        public Patient MapFromDto(PatientDto patientDto)
+        {
+            return _mapper.Map<Patient>(patientDto);
+        }
+
+        public PatientDto MapToDto(Patient patient)
+        {
+            return _mapper.Map<PatientDto>(patient);
+        }
+
+        public PagedList<PatientDto> MapToDto(PagedList<Patient> patients)
+        {
+            return _mapper.Map<PagedList<PatientDto>>(patients);
+        }
 
     }
 }

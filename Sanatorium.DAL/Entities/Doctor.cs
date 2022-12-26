@@ -4,7 +4,7 @@
     {
         public string FullName { get; set; }
 
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string Gender { get; set; }
 

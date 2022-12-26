@@ -1,4 +1,5 @@
 ﻿using Sanatorium.BLL.DTOs;
+using Sanatorium.DAL.Paging;
 
 namespace Sanatorium.BLL.IServices
 {
@@ -9,5 +10,7 @@ namespace Sanatorium.BLL.IServices
         Task RemovePateintAsync(int id, CancellationToken cancellationToken);
 
         Task<PatientDto> GetOnePatientAsync(int id, CancellationToken cancellationToken);
+
+        Task<PagedList<PatientDto>> GetPagePatientAsync(PageParameters pageParameters, CancellationToken cancellationToken);
     }
 }

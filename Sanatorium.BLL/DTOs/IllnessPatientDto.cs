@@ -1,6 +1,6 @@
 ﻿namespace Sanatorium.BLL.DTOs
 {
-    public class IllnessPatientDto
+    public class IllnessPatientDto : DtoBase
     {
         public int IllnessDegree { get; set; }
     }
