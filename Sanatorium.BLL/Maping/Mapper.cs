@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Sanatorium.BLL.DTOs;
 using Sanatorium.DAL.Entities;
-using Sanatorium.DAL.Paging;
 
 namespace Sanatorium.BLL.Maping
 {
@@ -15,20 +14,12 @@ namespace Sanatorium.BLL.Maping
             cfg.CreateMap<Illness, IllnessDto>();
             cfg.CreateMap<IllnessDto, Illness>();
 
-            cfg.CreateMap<IllnessPatient, IllnessPatientDto>();
-            cfg.CreateMap<IllnessPatientDto, IllnessPatient>();
 
             cfg.CreateMap<Patient, PatientDto>();
             cfg.CreateMap<PatientDto, Patient>();
 
             cfg.CreateMap<Procedure, ProcedureDto>();
             cfg.CreateMap<ProcedureDto, Procedure>();
-
-            cfg.CreateMap<ProcedureIllness, ProcedureIllnessDto>();
-            cfg.CreateMap<ProcedureIllnessDto, ProcedureIllness>();
-
-            cfg.CreateMap<ProcedureReciept, ProcedureRecieptDto>();
-            cfg.CreateMap<ProcedureRecieptDto, ProcedureReciept>();
 
             cfg.CreateMap<Reciept, RecieptDto>();
             cfg.CreateMap<RecieptDto, Reciept>();
@@ -39,6 +30,26 @@ namespace Sanatorium.BLL.Maping
             cfg.CreateMap<Voucher, VoucherDto>();
             cfg.CreateMap<VoucherDto, Voucher>();
 
+            cfg.CreateMap<VoucherRoom, VoucherRoomDto>();
+            cfg.CreateMap<VoucherRoomDto, VoucherRoom>();
+
+            cfg.CreateMap<VoucherDoctor, VoucherDoctorDto>();
+            cfg.CreateMap<VoucherDoctorDto, VoucherDoctor>();
+
+            cfg.CreateMap<VoucherIllness, VoucherIllnessDto>();
+            cfg.CreateMap<VoucherIllnessDto, VoucherIllness>();
+
+            cfg.CreateMap<VoucherProcedure, VoucherProcedureDto>();
+            cfg.CreateMap<VoucherProcedureDto, VoucherProcedure>();
+
+            cfg.CreateMap<IllnessStatistic, IllnessStasticDto>();
+
+            cfg.CreateMap<ProcedureStatistic, ProcedureStatisticDto>();
+
+            cfg.CreateMap<NewPatientsStatistics, NewPatientsStatisticsDto>();
+
+            cfg.CreateMap<AgeStatistics, AgeStatisticDto>();
+
         }).CreateMapper();
 
         public Patient MapFromDto(PatientDto patientDto)
@@ -46,15 +57,110 @@ namespace Sanatorium.BLL.Maping
             return _mapper.Map<Patient>(patientDto);
         }
 
+        public Room MapFromDto(RoomDto roomDto)
+        {
+            return _mapper.Map<Room>(roomDto);
+        }
+
+        public Doctor MapFromDto(DoctorDto doctorDto)
+        {
+            return _mapper.Map<Doctor>(doctorDto);
+        }
+
+        public Illness MapFromDto(IllnessDto illnessDto)
+        {
+            return _mapper.Map<Illness>(illnessDto);
+        }
+
+        public Voucher MapFromDto(VoucherDto voucherDto)
+        {
+            var voucher = new Voucher
+            {
+                CreationDate = voucherDto.CreationDate,
+                ExpirationDate = voucherDto.ExpirationDate,
+                Patient = new Patient { Id = voucherDto.PatientId },
+            };
+            return voucher;
+        }
+
+        public IllnessDto MapToDto(Illness illness)
+        {
+            return _mapper.Map<IllnessDto>(illness);
+        }
+
         public PatientDto MapToDto(Patient patient)
         {
             return _mapper.Map<PatientDto>(patient);
         }
 
-        public PagedList<PatientDto> MapToDto(PagedList<Patient> patients)
+        public ProcedureDto MapToDto(Procedure procedure)
         {
-            return _mapper.Map<PagedList<PatientDto>>(patients);
+            return _mapper.Map<ProcedureDto>(procedure);
         }
 
+        public RoomDto MapToDto(Room room)
+        {
+            return _mapper.Map<RoomDto>(room);
+        }
+
+        public Procedure MapFromDto(ProcedureDto procedureDto)
+        {
+            return _mapper.Map<Procedure>(procedureDto);
+        }
+
+        public DoctorDto MapToDto(Doctor doctor)
+        {
+            return _mapper.Map<DoctorDto>(doctor);
+        }
+
+        public List<RoomDto> MapToDto(List<Room> rooms)
+        {
+            return _mapper.Map<List<RoomDto>>(rooms);
+        }
+
+        public List<VoucherDto> MapToDto(List<Voucher> vouchers)
+        {
+            return _mapper.Map<List<VoucherDto>>(vouchers);
+        }
+
+        public List<IllnessDto> MapToDto(List<Illness> illnesses)
+        {
+            return _mapper.Map<List<IllnessDto>>(illnesses);
+        }
+
+        public List<ProcedureDto> MapToDto(List<Procedure> procedures)
+        {
+            return _mapper.Map<List<ProcedureDto>>(procedures);
+        }
+
+        public List<PatientDto> MapToDto(List<Patient> patients)
+        {
+            return _mapper.Map<List<PatientDto>>(patients);
+        }
+
+        public List<DoctorDto> MapToDto(List<Doctor> doctors)
+        {
+            return _mapper.Map<List<DoctorDto>>(doctors);
+        }
+
+        public List<ProcedureStatisticDto> MapToDto(List<ProcedureStatistic> procedures)
+        {
+            return _mapper.Map<List<ProcedureStatisticDto>>(procedures);
+        }
+
+        public List<IllnessStasticDto> MapToDto(List<IllnessStatistic> illnesses)
+        {
+            return _mapper.Map<List<IllnessStasticDto>>(illnesses);
+        }
+
+        public List<NewPatientsStatisticsDto> MapToDto(List<NewPatientsStatistics> patients)
+        {
+            return _mapper.Map<List<NewPatientsStatisticsDto>>(patients);
+        }
+
+        public List<AgeStatisticDto> MapToDto(List<AgeStatistics> agePatients)
+        {
+            return _mapper.Map<List<AgeStatisticDto>>(agePatients);
+        }
     }
 }

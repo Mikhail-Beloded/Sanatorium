@@ -8,10 +8,5 @@ namespace Sanatorium.UI.Controllers
         {
             return View();
         }
-
-        public IActionResult PatientsRedirect()
-        {
-            return View("");
-        }
     }
 }

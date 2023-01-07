@@ -8,10 +8,10 @@
 
         public string Gender { get; set; }
 
-        public string PhoneNumver { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string Specialization { get; set; }
 
-        public List<DoctorPatient> DoctorPatient { get; set; }
+        public List<VoucherDoctor> VoucherDoctors { get; set; }
     }
 }

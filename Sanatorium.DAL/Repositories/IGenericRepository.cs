@@ -1,5 +1,4 @@
 ﻿using Sanatorium.DAL.Entities;
-using Sanatorium.DAL.Paging;
 using System.Linq.Expressions;
 
 namespace Sanatorium.DAL.Repositories
@@ -14,11 +13,9 @@ namespace Sanatorium.DAL.Repositories
 
         Task<TEntity?> GetOneAsync(int id, CancellationToken cancellationToken);
 
-        Task<PagedList<TEntity>> GetPageAsync(PageParameters parameters, CancellationToken cancellationToken);
+        Task<List<TEntity>> GetAll(CancellationToken cancellationToken);
 
-        Task<PagedList<TEntity>> GetPageAsync(PageParameters parameters, Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
-
-        Task<List<TEntity>> GetAll();
+        Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
     }
 
 }

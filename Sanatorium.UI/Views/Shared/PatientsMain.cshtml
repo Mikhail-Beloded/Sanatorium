@@ -1,9 +1,9 @@
 ﻿@using Sanatorium.BLL.DTOs;
 
-@model Sanatorium.DAL.Paging.PagedList<PatientDto>
+@model List<PatientDto>
 
 @{
-    ViewData["Title"] = "Administrator Main Page";
+    ViewData["Title"] = "Patients Main Page";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,7 +23,7 @@
 <table class="table table-bordered table-responsive table-hover border border-0 border-dark">
     <tr>
         <th>Ім'я</th>
-        <th>Вік</th>
+        <th>Дата народження</th>
         <th>Стать</th>
         <th>Адреса</th>
         <th>Номер телефону</th>
@@ -38,9 +38,7 @@
     {
         <tr>
             <td>@d.FullName</td>
-            <td>@{
-                    DateTime.Now.Date.Subtract(d.BirthDate.Date).ToString();
-                }</td>
+            <td>@d.BirthDate.ToShortDateString()</td>
             <td>@d.Gender</td>
             <td>@d.Address</td>
             <td>@d.PhoneNumber</td>
@@ -48,7 +46,7 @@
             <td>@d.RegistrationDate.ToString()</td>
             <td>@d.VacineList</td>
             <td>@d.WorkPlace</td>
-            <td><a href="/Administrator/UpdatePatient/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-edit" style="font-size:24px"></i></a></td>
+            <td><a href="/Home/EditPatient/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-edit" style="font-size:24px"></i></a></td>
             <td><a href="/Home/DeletePatient/@d.Id.ToString()" style="width: 50px" class="btn btn-danger"><i class="fa fa-trash-o" style="font-size:24px"></i></a></td>
         </tr>
     }

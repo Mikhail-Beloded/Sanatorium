@@ -1,0 +1,46 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model DoctorDto
+
+@{
+    ViewBag.Title = "Edit Doctor Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<form asp-controller="Home" asp-action="SubmitEditDoctor" method="post">
+<div class="text-center">
+    <h1 class="display-4">Редагувати лікаря</h1>
+</div>
+
+<div  class="input-group">
+    <input hidden asp-for="Id" type="number" value="@Model.Id" class="form-control">
+</div>
+
+<div class="input-group">
+    <input asp-for="FullName" type="text" value="@Model.FullName" placeholder="ПІБ" class="form-control">
+</div>
+
+<div class="input-group">
+        <input asp-for="BirthDate" type="datetime" value="@Model.BirthDate.Date.ToShortDateString()" class="form-control" placeholder="Дата народження">
+</div>
+
+<div class="input-group">
+        <input asp-for="Gender" type="text" value="@Model.Gender" class="form-control" placeholder="Стать">
+</div>
+
+<div class="input-group">
+        <input asp-for="PhoneNumber" type="text" value="@Model.PhoneNumber" class="form-control" placeholder="Номер телефону">
+</div>
+
+<div class="input-group">
+        <input asp-for="Specialization" type="text" value="@Model.Specialization" class="form-control" placeholder="Спеціалізація">
+</div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

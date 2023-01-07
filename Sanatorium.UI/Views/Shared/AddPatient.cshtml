@@ -1,35 +1,57 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Додати пацієнта</h1>
-</div>
+﻿@using Sanatorium.BLL.DTOs;
 
-<div class="input-group">
-    <input type="text" placeholder="Ім'я'" class="form-control">
-</div>
+@model PatientDto
 
-<div class="input-group">
-    <input type="datetime" class="form-control" placeholder="Дата народження">
-</div>
+@{
+    ViewBag.Title = "Add Patient Page";
+}
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Стать">
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Адреса">
-</div>
+<form asp-controller="Home" asp-action="SubmitAddPatient" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Додати Пацієнта</h1>
+    </div>
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Номер телефону">
-</div>
+    <div class="input-group">
+        <input asp-for="FullName" type="text" placeholder="ПІБ" class="form-control">
+    </div>
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Електронна пошта">
-</div>
+    <div class="input-group">
+        <input asp-for="BirthDate" type="datetime" class="form-control" placeholder="Дата народження">
+    </div>
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Список вакцин">
-</div>
+    <div class="input-group">
+        <input asp-for="Gender" type="text" class="form-control" placeholder="Стать">
+    </div>
 
-<div>
-    <input type="text" class="form-control" placeholder="Місце роботи">
-</div>
+    <div class="input-group">
+        <input asp-for="Address" type="text" class="form-control" placeholder="Адреса">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Номер телефону">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Email" type="text" class="form-control" placeholder="Електронна пошта">
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="RegistrationDate" type="datetime" value="@DateTime.Now.Date.ToShortDateString()" class="form-control" placeholder="Дата реєстрації">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="VacineList" type="text" class="form-control" placeholder="Список вакцин">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="WorkPlace" type="text" class="form-control" placeholder="Місце роботи">
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

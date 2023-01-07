@@ -1,0 +1,38 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model ProcedureDto
+
+@{
+    ViewBag.Title = "Edit Procedure Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<form asp-controller="Home" asp-action="SubmitEditProcedure" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Редагувати процедуру</h1>
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="Id" type="number" value="@Model.Id" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Name" type="text" value="@Model.Name" placeholder="Назва" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="SessionPrice" type="datetime" value="@Model.SessionPrice" class="form-control" placeholder="Ціна">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="SessionMinutes" type="text" value="@Model.SessionMinutes" class="form-control" placeholder="Кількість хвилин">
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

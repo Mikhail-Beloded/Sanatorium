@@ -14,16 +14,12 @@
 
         public string Email { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public string RegistrationDate { get; set; }
 
         public string VacineList { get; set; }
 
         public string WorkPlace { get; set; }
 
-        public List<DoctorPatient> DoctorPatient { get; set; }
-
-        public List<IllnessPatient> IllnessPatient { get; set;}
-
-        public List<RoomPatient> RoomPatient { get; set; }
+        public List<Voucher> Vouchers { get; set; }
     }
 }

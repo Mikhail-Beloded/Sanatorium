@@ -1,0 +1,61 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model PatientDto
+
+@{
+    ViewBag.Title = "Edit Patient Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<form asp-controller="Home" asp-action="SubmitEditPatient" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Редагувати пацієнта</h1>
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="Id" type="number" value="@Model.Id" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="FullName" type="text" value="@Model.FullName" placeholder="ПІБ" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="BirthDate" type="datetime" value="@Model.BirthDate.Date" class="form-control" placeholder="Дата народження">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Gender" type="text" value="@Model.Gender" class="form-control" placeholder="Стать">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Address" type="text" value="@Model.Address" class="form-control" placeholder="Адреса">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="PhoneNumber" type="text" value="@Model.PhoneNumber" class="form-control" placeholder="Номер телефону">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Email" type="text" value="@Model.Email" class="form-control" placeholder="Електронна пошта">
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="RegistrationDate" type="text" value="@Model.RegistrationDate" class="form-control" placeholder="Номер телефону">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="VacineList" type="text" value="@Model.VacineList" class="form-control" placeholder="Список вакцин">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="WorkPlace" type="text" value="@Model.WorkPlace" class="form-control" placeholder="Місце роботи">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

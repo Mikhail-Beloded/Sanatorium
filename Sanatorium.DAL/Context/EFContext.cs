@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sanatorium.DAL.Entities;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Sanatorium.DAL.Context
 {
@@ -21,35 +22,35 @@ namespace Sanatorium.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DoctorPatient>().HasKey(x => new { x.PatientId, x.DoctorId });
-            modelBuilder.Entity<IllnessPatient>().HasKey(x => new { x.IllnessId, x.PatientId });
-            modelBuilder.Entity<ProcedureIllness>().HasKey(x => new { x.ProcedureId, x.IllnessId });
-            modelBuilder.Entity<ProcedureReciept>().HasKey(x => new { x.ProcedureId, x.RecieptId });
-            modelBuilder.Entity<RoomPatient>().HasKey(x => new { x.PatientId, x.RoomId });
+            modelBuilder.Entity<VoucherDoctor>().HasKey(x => new { x.VoucherId, x.DoctorId });
+            modelBuilder.Entity<VoucherIllness>().HasKey(x => new { x.VoucherId, x.IllnessId });
+            modelBuilder.Entity<VoucherProcedure>().HasKey(x => new { x.VoucherId, x.ProcedureId });
+            modelBuilder.Entity<VoucherRoom>().HasKey(x => new { x.VoucherId, x.RoomId });
+            modelBuilder.Entity<Voucher>().HasOne(x => x.Reciept)
+                                          .WithOne(y => y.Voucher)
+                                          .HasForeignKey<Reciept>(z => z.VoucherId);
         }
 
         public DbSet<Doctor> Doctors { get; set; }
 
-        public DbSet<DoctorPatient> DoctorsPatients { get; set; }
-
         public DbSet<Illness> Illnesses { get; set;}
-
-        public DbSet<IllnessPatient> IllnessesPatients { get; set; }
 
         public DbSet<Patient> Patients { get; set; }
 
         public DbSet<Procedure> Procedures { get; set; }
 
-        public DbSet<ProcedureIllness> ProceduresIllnesses { get; set;}
-
-        public DbSet<ProcedureReciept> ProceduresReciepts { get; set; }
-
         public DbSet<Reciept> Reciepts { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
 
-        public DbSet<RoomPatient> RoomsPatients { get;set; }
-
         public DbSet<Voucher> Vouchers { get; set; }
+
+        public DbSet<VoucherDoctor> VoucherDoctors { get; set; }
+
+        public DbSet<VoucherIllness> VoucherIllnesses { get; set; }
+
+        public DbSet<VoucherProcedure> VoucherProcedures { get; set; }
+
+        public DbSet<VoucherRoom> VoucherRooms { get; set; }
     }
 }

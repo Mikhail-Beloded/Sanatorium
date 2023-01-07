@@ -1,0 +1,29 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model IllnessDto
+
+@{
+    ViewBag.Title = "Add Illness Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form asp-controller="Home" asp-action="SubmitAddIllness" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Додати хворобу</h1>
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Name" type="text" placeholder="Назва" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Type" type="text" class="form-control" placeholder="Тип">
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

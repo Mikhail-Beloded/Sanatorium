@@ -8,8 +8,8 @@
 
         public string Type { get; set; }
 
-        public PatientDto Patient { get; set; }
+        public int VoucherId { get; set; }
 
-        public List<ProcedureRecieptDto> ProcedureReciept { get; set; }
+        public VoucherDto Voucher { get; set; }
     }
 }

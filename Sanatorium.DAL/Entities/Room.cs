@@ -6,6 +6,6 @@
 
         public int Capacity { get; set; }
 
-        public List<RoomPatient> RoomPatient { get; set; }
+        public List<VoucherRoom> VoucherRooms { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model VoucherDto
+
+@{
+    ViewBag.Title = "Add Voucher Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form asp-controller="Home" asp-action="SubmitAddVoucher" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Створити путівку</h1>
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="CreationDate" type="datetime" value="@DateTime.Now" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="ExpirationDate" type="datetime" class="form-control" placeholder="Дійсна до">
+    </div>
+
+    <label>Пацієнти</label>
+
+    <div class="input-group">
+        <select asp-for="PatientId" asp-items="ViewBag.Patients"></select>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

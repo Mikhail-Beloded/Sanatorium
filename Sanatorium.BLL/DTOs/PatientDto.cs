@@ -1,4 +1,6 @@
-﻿namespace Sanatorium.BLL.DTOs
+﻿using Sanatorium.DAL.Entities;
+
+namespace Sanatorium.BLL.DTOs
 {
     public class PatientDto : DtoBase
     {
@@ -14,12 +16,12 @@
 
         public string Email { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public string RegistrationDate { get; set; }
 
         public string VacineList { get; set; }
 
         public string WorkPlace { get; set; }
 
-        public List<IllnessPatientDto> IllnessPatient { get; set; }
+        public List<VoucherDto> Vouchers { get; set; }
     }
 }

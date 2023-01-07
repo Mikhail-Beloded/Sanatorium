@@ -1,13 +1,108 @@
-﻿@{
+﻿@model dynamic
+
+@{
     ViewData["Title"] = "Manager Main Page";
 }
 
+<div class="text-center">
+    <h1 class="display-4">Сторінка менеджера</h1>
+</div>
+
 <div class="p-3 d-flex justify-content-center">
     <a href="/Home/PatientsMain" class="btn btn-secondary w-25"> Пацієнти </a>
-    <a href="Doctor/Index" class="btn btn-secondary w-25"> Лікарі </a>
-    <a href="Doctor/Index" class="btn btn-secondary w-25"> Кімнати </a>
+    <a href="/Home/DoctorsMain" class="btn btn-secondary w-25"> Лікарі </a>
     <a href="Doctor/Index" class="btn btn-secondary w-25"> Квитанції </a>
-    <a href="Doctor/Index" class="btn btn-secondary w-25"> Процедури </a>
     <a href="Doctor/Index" class="btn btn-secondary w-25"> Хвороби </a>
-    <a href="Doctor/Index" class="btn btn-secondary w-25"> Путівки </a>
 </div>
+
+<div class="text-center">
+    <h1 class="display-6">ТОР-5 захворювань</h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Захворювання</th>
+        <th>Кількість пацієнтів</th>
+        <th>Всього пацієнтів</th>
+    </tr>
+    @foreach (var d in Model.IllnessStatistic)
+    {
+            <tr>
+                <td>@d.Name</td>
+                <td>@d.PatientCount</td>
+                <td>@d.TotalPatients</td>
+            </tr>
+    }
+</table>
+
+<div class="text-center">
+    <h1 class="display-6"></h1>
+</div>
+
+<div class="text-center">
+    <h1 class="display-6">ТОР-5 процедур</h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Назва процедури</th>
+        <th>Кількість пацієнтів</th>
+        <th>Всього пацієнтів</th>
+    </tr>
+    @foreach (var d in Model.ProceduresStatistic)
+    {
+                <tr>
+                    <td>@d.Name</td>
+                    <td>@d.PatientCount</td>
+                    <td>@d.TotalPatients</td>
+                </tr>
+    }
+</table>
+
+<div class="text-center">
+    <h1 class="display-6"></h1>
+</div>
+
+<div class="text-center">
+    <h1 class="display-6">Нові пацієнти по датам</h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Дата</th>
+        <th>Кількість пацієнтів</th>
+        <th>Всього пацієнтів</th>
+    </tr>
+    @foreach (var d in Model.NewPatientsStatistic)
+    {
+                    <tr>
+                        <td>@d.Date</td>
+                        <td>@d.PatientCount</td>
+                        <td>@d.TotalPatients</td>
+                    </tr>
+    }
+</table>
+
+<div class="text-center">
+    <h1 class="display-6"></h1>
+</div>
+
+<div class="text-center">
+    <h1 class="display-6">Список пацієнтів по рокам народження</h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Вік</th>
+        <th>Кількість пацієнтів</th>
+        <th>Всього пацієнтів</th>
+    </tr>
+    @foreach (var d in Model.AgePatientsStatistic)
+    {
+                        <tr>
+                            <td>@d.Age</td>
+                            <td>@d.PatientCount</td>
+                            <td>@d.TotalPatients</td>
+                        </tr>
+    }
+</table>

@@ -6,8 +6,6 @@
 
         public string Type { get; set; }
 
-        public List<IllnessPatient> IllnessPatient { get; set; }
-
-        public List<ProcedureIllness> ProcedureIllness { get; set; }
+        public List<VoucherIllness> VoucherIllnesses { get; set; }
     }
 }
