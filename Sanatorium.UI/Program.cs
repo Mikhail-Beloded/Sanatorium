@@ -12,8 +12,8 @@ builder.Services.AddServices();
 
 var app = builder.Build();
 
-var context = new EFContext();
-DbInitialaizer.Initialize(context);
+//var context = new EFContext();
+//DbInitialaizer.Initialize(context);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

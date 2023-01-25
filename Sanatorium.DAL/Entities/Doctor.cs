@@ -12,6 +12,6 @@
 
         public string Specialization { get; set; }
 
-        public List<VoucherDoctor> VoucherDoctors { get; set; }
+        public List<Voucher> Vouchers { get; set; }
     }
 }

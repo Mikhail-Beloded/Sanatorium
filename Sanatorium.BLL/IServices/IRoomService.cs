@@ -17,5 +17,7 @@ namespace Sanatorium.BLL.IServices
         Task<RoomDto> GetOneRoomAsync(int id, CancellationToken cancellationToken);
 
         Task UpdateRoomAsync(RoomDto roomDto, CancellationToken cancellationToken);
+
+        Task<List<RoomDto>> GetAvaliableRooms(CancellationToken cancellationToken);
     }
 }

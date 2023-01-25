@@ -4,7 +4,6 @@ using Sanatorium.BLL.DTOs;
 using Sanatorium.BLL.IServices;
 using Sanatorium.UI.Models;
 using System.Diagnostics;
-using System.Dynamic;
 
 namespace Sanatorium.UI.Controllers
 {
@@ -26,7 +25,9 @@ namespace Sanatorium.UI.Controllers
 
         private readonly IIllnessService _illnessService;
 
-        public HomeController(ILogger<HomeController> logger, IPatientService patientService, IRoomService roomService, IVoucherService voucherService, IDoctorService doctorService, IStatisticService statisticService, IProcedureService procedureService, IIllnessService illnessService)
+        private readonly IRecieptService _recieptService;
+
+        public HomeController(ILogger<HomeController> logger, IPatientService patientService, IRoomService roomService, IVoucherService voucherService, IDoctorService doctorService, IStatisticService statisticService, IProcedureService procedureService, IIllnessService illnessService, IRecieptService recieptService)
         {
             _logger = logger;
             _patientService = patientService;
@@ -36,6 +37,7 @@ namespace Sanatorium.UI.Controllers
             _statisticService = statisticService;
             _procedureService = procedureService;
             _illnessService = illnessService;
+            _recieptService= recieptService;
         }
 
         public IActionResult Index()
@@ -85,6 +87,59 @@ namespace Sanatorium.UI.Controllers
             return View(dtos);
         }
 
+        public async Task<IActionResult> RecieptsMain(CancellationToken cancellationToken)
+        {
+            var dtos = await _recieptService.GetAll(cancellationToken);
+            return View(dtos);
+        }
+
+        public async Task<IActionResult> OldPatients(CancellationToken cancellationToken)
+        {
+            var dtos = await _patientService.GetAllPatients(x => x.BirthDate.AddYears(55)<DateTime.Now, cancellationToken);
+            return View("PatientsMain", dtos);
+        }
+
+        public async Task<IActionResult> YoungPatients(CancellationToken cancellationToken)
+        {
+            var dtos = await _patientService.GetAllPatients(x => x.BirthDate.AddYears(30) >= DateTime.Now && x.BirthDate.AddYears(18) < DateTime.Now, cancellationToken);
+            return View("PatientsMain", dtos);
+        }
+
+        public async Task<IActionResult> MiddlePatients(CancellationToken cancellationToken)
+        {
+            var dtos = await _patientService.GetAllPatients(x => x.BirthDate.AddYears(55) >= DateTime.Now && x.BirthDate.AddYears(30) < DateTime.Now, cancellationToken);
+            return View("PatientsMain", dtos);
+        }
+
+        public async Task<IActionResult> OrderedPatients(CancellationToken cancellationToken)
+        {
+            var dtos = await _patientService.GetPatientsOrdered(cancellationToken);
+            return View("PatientsMain", dtos);
+        }
+
+        public async Task<IActionResult> SubmitSearchPatient(SearchModel model, CancellationToken cancellationToken)
+        {
+            var dtos = await _patientService.GetAllPatients(x => x.FullName.Contains(model.Content), cancellationToken);
+            return View("PatientsMain", dtos);
+        }
+
+        public async Task<IActionResult> GenerateRecieptPDF(int id, CancellationToken cancellationToken)
+        {
+            var pdf = await _recieptService.GeneratePdfReciept(id, cancellationToken);
+            var file = new FileContentResult(pdf, "application/pdf");
+            return file;
+        }
+       
+        public IActionResult PatientsFilter()
+        {
+            return View();
+        }
+
+        public IActionResult SearchPatient()
+        {
+            return View();
+        }
+
         public IActionResult AddPatient()
         {
             return View();
@@ -112,9 +167,19 @@ namespace Sanatorium.UI.Controllers
 
         public async Task<IActionResult> AddVoucher(CancellationToken cancellationToken)
         {
-            var entities = await _patientService.GetAllPatients(cancellationToken);
-            ViewBag.Patients = new SelectList(entities, "Id", "FullName");
+            var patients = await _patientService.GetAllPatients(cancellationToken);
+            var rooms = await _roomService.GetAvaliableRooms(cancellationToken);
+            var illnesses = await _illnessService.GetAllIllnesses(cancellationToken);
+            ViewBag.Patients = new SelectList(patients, "Id", "FullName");
+            ViewBag.Rooms = new SelectList(rooms, "Id", "Id");
+            ViewBag.Illnesses = new SelectList(illnesses, "Id", "Name");
             return View();
+        }
+
+        public async Task<IActionResult> AutomaticGeneration(CancellationToken cancellationToken)
+        {
+            var dtos = await _voucherService.GetAllVouchersWithoutDoctors(cancellationToken);
+            return View(dtos);
         }
 
         public async Task<IActionResult> EditDoctor(int id, CancellationToken cancellationToken)
@@ -177,6 +242,12 @@ namespace Sanatorium.UI.Controllers
             return RedirectToAction("RoomsMain");
         }
 
+        public async Task<IActionResult> DeleteReciept(int id, CancellationToken cancellationToken)
+        {
+            await _recieptService.DeleteRecieptAsync(id, cancellationToken);
+            return RedirectToAction("RecieptsMain");
+        }
+
         public async Task<IActionResult> SubmitAddDoctor(DoctorDto doctor, CancellationToken cancellationToken)
         {
             await _doctorService.AddDoctorAsync(doctor, cancellationToken);
@@ -207,9 +278,25 @@ namespace Sanatorium.UI.Controllers
             return RedirectToAction("RoomsMain");
         }
 
-        public async Task<IActionResult> SubmitAddVoucher(VoucherDto voucherDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> SubmitAddVoucher(AddVoucherModel model, CancellationToken cancellationToken)
         {
+            var vocherRoom = new VoucherRoomDto
+            {
+                DayCount = model.DayCount,
+                RoomId= model.RoomId,
+            };
+
+            var voucherDto = new VoucherDto
+            {
+                CreationDate = model.CreationDate,
+                ExpirationDate = model.ExpirationDate,
+                PatientId = model.PatientId,
+                IllnessId = model.IllnessId,
+                VoucherRooms = new List<VoucherRoomDto> { vocherRoom},
+            };
+
             await _voucherService.AddVoucherAsync(voucherDto, cancellationToken);
+
             return RedirectToAction("VouchersMain");
         }
 
@@ -241,6 +328,13 @@ namespace Sanatorium.UI.Controllers
         {
             await _roomService.UpdateRoomAsync(roomDto, cancellationToken);
             return RedirectToAction("RoomsMain");
+        }
+
+        public async Task<IActionResult> SubmitGeneration(int id, CancellationToken cancellationToken)
+        {
+            var pdf = await _voucherService.GenerateDirectionPdf(id, cancellationToken);
+            var file = new FileContentResult(pdf, "application/pdf");
+            return file;
         }
     }
 }

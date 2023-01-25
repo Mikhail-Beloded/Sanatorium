@@ -37,7 +37,7 @@ namespace Sanatorium.DAL
             var room5 = new Room
             {
                 Price = 200,
-                Capacity = 2,
+                Capacity = 1,
             };
 
             var room6 = new Room
@@ -54,65 +54,65 @@ namespace Sanatorium.DAL
 
             var patient4 = new Patient
             {
-                FullName = "Іванов Іван Іванович",
+                FullName = "Adam Smith",
 
                 BirthDate = new DateTime(1960, 9, 15),
 
-                Gender = "чоловіча",
+                Gender = "male",
 
-                Address = "Харків",
+                Address = "Kharkiv",
 
                 PhoneNumber = "+380504547412",
 
-                Email = "ivanov@gmail.com",
+                Email = "smith@gmail.com",
 
                 RegistrationDate = "02.01.2023",
 
                 VacineList = "COVID-19: Coronavac",
 
-                WorkPlace = "інженер",
+                WorkPlace = "driver",
             };
 
             var patient5 = new Patient
             {
-                FullName = "Висоцький Володимир Семенович",
+                FullName = "Ben Potter",
 
                 BirthDate = new DateTime(1938, 1, 25),
 
-                Gender = "чоловіча",
+                Gender = "male",
 
-                Address = "Харків",
+                Address = "Kharkiv",
 
                 PhoneNumber = "+380958587114",
 
-                Email = "visockiy@gmail.com",
+                Email = "potter@gmail.com",
 
                 RegistrationDate = "02.01.2023",
 
                 VacineList = "-",
 
-                WorkPlace = "співак",
+                WorkPlace = "singer",
             };
 
             var patient6 = new Patient
             {
-                FullName = "Петренко Валентина Петрівна",
+                FullName = "Lucie Brown",
 
                 BirthDate = new DateTime(2004, 1, 26),
 
-                Gender = "жіноча",
+                Gender = "female",
 
-                Address = "Київ",
+                Address = "Kiyv",
 
                 PhoneNumber = "+380504589154",
 
-                Email = "petrenko@gmail.com",
+                Email = "brown@gmail.com",
 
                 RegistrationDate = "01.01.2023",
 
                 VacineList = "-",
 
-                WorkPlace = "програміст",
+                WorkPlace = "programmer",
             };
 
             var voucher1 = new Voucher
@@ -169,21 +169,21 @@ namespace Sanatorium.DAL
 
             var procedure1 = new Procedure
             {
-                Name = "массаж",
+                Name = "massage",
                 SessionPrice = 1000,
                 SessionMinutes = 30,
             };
 
             var procedure2 = new Procedure
             {
-                Name = "інгаляції",
+                Name = "inhalation",
                 SessionPrice = 200,
                 SessionMinutes = 15,
             };
 
             var procedure3 = new Procedure
             {
-                Name = "ароматерапія",
+                Name = "aromatherapy",
                 SessionPrice = 500,
                 SessionMinutes = 60,
             };
@@ -199,82 +199,84 @@ namespace Sanatorium.DAL
 
             var doctor1 = new Doctor
             {
-                FullName = "Білодід Михайло Олександрович",
+                FullName = "Bilodid Mykhailo Oleksandrovych",
 
                 BirthDate = DateTime.Now,
 
-                Gender = "чоловіча",
+                Gender = "male",
 
                 PhoneNumber = "+380995326869",
 
-                Specialization = "серцеві захворювання",
+                Specialization = "heart illnesses",
+
+                Vouchers = new List<Voucher> { voucher1 }
             };
 
             var doctor2 = new Doctor
             {
-                FullName = "Зайцев Віктор Іванович",
+                FullName = "Visockiy Volodymyr Semenovich",
 
                 BirthDate = DateTime.Now,
 
-                Gender = "чоловіча",
+                Gender = "male",
 
                 PhoneNumber = "+380995384769",
 
-                Specialization = "дихальні захворювання",
+                Specialization = "breath illnesses",
+
+                Vouchers = new List<Voucher> { voucher2}
             };
 
             var doctor3 = new Doctor
             {
-                FullName = "Болтов Олег Олександрович",
+                FullName = "Jack Adams",
 
                 BirthDate = DateTime.Now,
 
-                Gender = "чоловіча",
+                Gender = "male",
 
                 PhoneNumber = "+380989526869",
 
-                Specialization = "шкірні захворювання",
+                Specialization = "skin illnesses",
+
+                Vouchers = new List<Voucher> { voucher3}
             };
 
-            var vocherDoctor1 = new VoucherDoctor { Voucher = voucher1, Doctor = doctor1 };
-            var vocherDoctor2 = new VoucherDoctor { Voucher = voucher2, Doctor = doctor2 };
-            var vocherDoctor3 = new VoucherDoctor { Voucher = voucher3, Doctor = doctor3 };
-
-            voucher1.VoucherDoctors = new List<VoucherDoctor> { vocherDoctor1 };
-            voucher2.VoucherDoctors = new List<VoucherDoctor> { vocherDoctor2 };
-            voucher3.VoucherDoctors = new List<VoucherDoctor> { vocherDoctor3 };
+            voucher1.Doctor = doctor1;
+            voucher2.Doctor = doctor2;
+            voucher3.Doctor = doctor3;
 
             var illness1 = new Illness
             {
-                Name = "інфаркт",
-                Type = "серцеві захворювання"
+                Name = "heart attack",
+                Type = "heart illnesses",
+                Vouchers = new List<Voucher> { voucher1}
             };
 
             var illness2 = new Illness
             {
-                Name = "туберкулез",
-                Type = "дихальні захворювання"
+
+                Name = "tuberculosis",
+                Type = "breath illnesses",
+                Vouchers = new List<Voucher> { voucher2}
             };
 
             var illness3 = new Illness
             {
-                Name = "алергія",
-                Type = "шкірні захворювання"
+                Name = "allergy",
+                Type = "skin illnesses",
+                Vouchers = new List<Voucher> { voucher3}
             };
 
-            var voucherIllness1 = new VoucherIllness { Voucher = voucher1, Illness = illness1, IllnessGrade = 1 };
-            var voucherIllness2 = new VoucherIllness { Voucher = voucher2, Illness = illness2, IllnessGrade = 3 };
-            var voucherIllness3 = new VoucherIllness { Voucher = voucher3, Illness = illness3, IllnessGrade = 1 };
-
-            voucher1.VoucherIllnesses = new List<VoucherIllness> { voucherIllness1 };
-            voucher2.VoucherIllnesses = new List<VoucherIllness> { voucherIllness2 };
-            voucher3.VoucherIllnesses = new List<VoucherIllness> { voucherIllness3 };
+            voucher1.Illness = illness1;
+            voucher2.Illness = illness2;
+            voucher3.Illness = illness3;
 
             var reciept1 = new Reciept
             {
                 CreateDate = DateTime.Now,
                 Sum = 2000,
-                Type = "паперова",
+                Type = "paper",
                 Voucher = voucher1
             };
 
@@ -282,7 +284,7 @@ namespace Sanatorium.DAL
             {
                 CreateDate = DateTime.Now,
                 Sum = 5000,
-                Type = "паперова",
+                Type = "paper",
                 Voucher = voucher2
             };
 
@@ -290,7 +292,7 @@ namespace Sanatorium.DAL
             {
                 CreateDate = DateTime.Now,
                 Sum = 1000,
-                Type = "електронна",
+                Type = "electronic",
                 Voucher = voucher3
             };
 

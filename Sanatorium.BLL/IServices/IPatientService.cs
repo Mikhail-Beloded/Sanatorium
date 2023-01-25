@@ -1,10 +1,16 @@
 ﻿using Sanatorium.BLL.DTOs;
+using Sanatorium.DAL.Entities;
+using System.Linq.Expressions;
 
 namespace Sanatorium.BLL.IServices
 {
     public interface IPatientService
     {
         Task<List<PatientDto>> GetAllPatients(CancellationToken cancellationToken);
+
+        Task<List<PatientDto>> GetPatientsOrdered(CancellationToken cancellationToken);
+
+        Task<List<PatientDto>> GetAllPatients(Expression<Func<Patient, bool>> predicate, CancellationToken cancellationToken);
 
         Task AddPateintAsync(PatientDto patientDto, CancellationToken cancellationToken);
 

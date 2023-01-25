@@ -8,14 +8,16 @@
 
         public Patient Patient { get; set; }
 
-        public Reciept Reciept { get; set; }
+        public Doctor? Doctor { get; set; }
 
-        public List<VoucherDoctor> VoucherDoctors { get; set; }
+        public Illness Illness { get; set; }
+
+        public int IllnessDegree { get; set; }
+
+        public Reciept Reciept { get; set; }
 
         public List<VoucherRoom> VoucherRooms { get; set; }
 
         public List<VoucherProcedure> VoucherProcedures { get; set; }
-
-        public List<VoucherIllness> VoucherIllnesses { get; set; }
     }
 }

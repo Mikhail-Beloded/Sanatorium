@@ -1,6 +1,6 @@
 ﻿@using Sanatorium.BLL.DTOs;
 
-@model VoucherDto
+@model AddVoucherModel
 
 @{
     ViewBag.Title = "Add Voucher Page";
@@ -25,6 +25,26 @@
 
     <div class="input-group">
         <select asp-for="PatientId" asp-items="ViewBag.Patients"></select>
+    </div>
+
+    <label>Кімнати</label>
+
+    <div class="input-group">
+        <select asp-for="RoomId" asp-items="ViewBag.Rooms"></select>
+    </div>
+
+    <div class="input-group">
+        <input asp-for="DayCount" type="number" class="form-control" placeholder="Кількість днів проживання в кімнаті">
+    </div>
+
+    <label>Захворювання</label>
+
+    <div class="input-group">
+        <select asp-for="IllnessId" asp-items="ViewBag.Illnesses"></select>
+    </div>
+
+    <div class="input-group">
+        <input asp-for="IllnessGrade" type="number" class="form-control" placeholder="Ступінь захворення">
     </div>
 
     <div class="mb-3">

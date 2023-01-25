@@ -18,6 +18,12 @@ namespace Sanatorium.BLL
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IStatisticsRepository, StatisticRepository>();
+            services.AddScoped<IVoucherRoomRepository, VoucherRoomRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IPatientRepositoy, PatientsRepository>();
+            services.AddScoped<IRecieptRepository, RecieptRepository>();
+            services.AddScoped<IVoucherRepository, VoucherRepository>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
 
             return services;
         }
@@ -31,6 +37,7 @@ namespace Sanatorium.BLL
             services.AddScoped<IStatisticService, StatisticService>();
             services.AddScoped<IProcedureService, ProcedureService>();
             services.AddScoped<IIllnessService, IllnessService>();
+            services.AddScoped<IRecieptService, RecieptService>();
 
             return services;
         }

@@ -9,11 +9,11 @@ namespace Sanatorium.BLL.Services
 {
     public class RoomService : IRoomService
     {
-        private readonly IGenericRepository<Room> _repository;
+        private readonly IRoomRepository _repository;
 
         private readonly Mapper _mapper = new Mapper();
 
-        public RoomService(IGenericRepository<Room> repository) 
+        public RoomService(IRoomRepository repository) 
         {
             _repository= repository;
         }
@@ -21,18 +21,24 @@ namespace Sanatorium.BLL.Services
         public async Task AddRoomAsync(RoomDto roomDto, CancellationToken cancellationToken)
         {
             var entity = _mapper.MapFromDto(roomDto);
-            await _repository.AddAsync(entity, cancellationToken);
+            await _repository.AddRoomAsync(entity, cancellationToken);
         }
 
         public async Task<List<RoomDto>> GetAllRooms(CancellationToken cancellationToken)
         {
-            var entities = await _repository.GetAll(cancellationToken);
+            var entities = await _repository.GetAllRooms(cancellationToken);
             return _mapper.MapToDto(entities);
         }
 
         public async Task<List<RoomDto>> GetAllRooms(Expression<Func<Room, bool>> predicate, CancellationToken cancellationToken)
         {
-            var entities = await _repository.GetAll(predicate, cancellationToken);
+            var entities = await _repository.GetAllRooms(predicate, cancellationToken);
+            return _mapper.MapToDto(entities);
+        }
+
+        public async Task<List<RoomDto>> GetAvaliableRooms(CancellationToken cancellationToken)
+        {
+            var entities = await _repository.GetAvaliableRooms(cancellationToken);
             return _mapper.MapToDto(entities);
         }
 
@@ -49,13 +55,13 @@ namespace Sanatorium.BLL.Services
         public async Task RemoveRoomAsync(int id, CancellationToken cancellationToken)
         {
             var entity = await _repository.GetOneAsync(id, cancellationToken);
-            await _repository.DeleteAsync(entity, cancellationToken);
+            await _repository.DeleteRoomAsync(entity, cancellationToken);
         }
 
         public async Task UpdateRoomAsync(RoomDto roomDto, CancellationToken cancellationToken)
         {
             var entity = _mapper.MapFromDto(roomDto);
-            await _repository.UpdateAsync(entity, cancellationToken);
+            await _repository.UpdateRoomAsync(entity, cancellationToken);
         }
     }
 }

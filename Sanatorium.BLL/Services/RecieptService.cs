@@ -1,8 +1,8 @@
 ﻿using iText.IO.Font.Constants;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
-using iText.Kernel.Pdf.Canvas;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas;
 using Sanatorium.BLL.DTOs;
 using Sanatorium.BLL.IServices;
 using Sanatorium.BLL.Maping;
@@ -10,33 +10,26 @@ using Sanatorium.DAL.Repositories;
 
 namespace Sanatorium.BLL.Services
 {
-    public class VoucherService : IVoucherService
+    public class RecieptService : IRecieptService
     {
-        private readonly IVoucherRepository _repository;
+        private readonly IRecieptRepository _repository;
 
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly Mapper _mapper = new Mapper();
 
-        private Mapper _mapper = new();
-
-        public VoucherService(IVoucherRepository repository, IDoctorRepository doctorRepository) 
+        public RecieptService(IRecieptRepository repository)
         {
-            _repository= repository;
-            _doctorRepository= doctorRepository;
+            _repository = repository;
         }
 
-        public async Task AddVoucherAsync(VoucherDto voucherDto, CancellationToken cancellationToken)
+        public async Task DeleteRecieptAsync(int id, CancellationToken cancellationToken)
         {
-            var entity = _mapper.MapFromDto(voucherDto);
-            await _repository.AddAsync(entity, cancellationToken);
+            var entity = await _repository.GetOneAsync(id, cancellationToken);
+            await _repository.DeleteRecieptAsync(entity, cancellationToken);
         }
 
-        public async Task<byte[]> GenerateDirectionPdf(int id, CancellationToken cancellationToken)
+        public async Task<byte[]> GeneratePdfReciept(int id, CancellationToken cancellationToken)
         {
-            var voucher = await _repository.GetOneAsync(id, cancellationToken);
-            var doctor = await _doctorRepository.GetOneForDirectionAsync(voucher.Id, voucher.Illness.Type, cancellationToken);
-            voucher.Doctor = doctor;
-            await _repository.UpdateAsync(voucher, cancellationToken);
-
+            var reciept = await _repository.GetOneWithPatient(id, cancellationToken);
             using var pdfReader = new PdfReader(@"C:\Users\Михаил\source\repos\Mikhail-Beloded\sanatorium\Sanatorium.BLL\OutputReciept.pdf");
             using var stream = new MemoryStream();
             using var writer = new PdfWriter(stream);
@@ -44,40 +37,40 @@ namespace Sanatorium.BLL.Services
 
             var page = pdf.GetPage(1);
             var canvas = new PdfCanvas(page);
-
+             
             canvas.BeginText()
                   .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN), 14)
                   .SetFillColor(new DeviceRgb(42, 44, 62))
-                  .MoveText(200, 600)
-                  .ShowText($"Direction")
+                  .MoveText(200,600)
+                  .ShowText($"Reciept {reciept.Id}")
                   .EndText();
 
             canvas.BeginText()
                   .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN), 14)
                   .SetFillColor(new DeviceRgb(42, 44, 62))
                   .MoveText(200, 580)
-                  .ShowText($"Doctor: {doctor.FullName}")
+                  .ShowText($"Date: {reciept.CreateDate}")
                   .EndText();
 
             canvas.BeginText()
                   .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN), 14)
                   .SetFillColor(new DeviceRgb(42, 44, 62))
                   .MoveText(200, 560)
-                  .ShowText($"Specialization: {doctor.Specialization}")
+                  .ShowText($"Sum: {reciept.Sum}")
                   .EndText();
 
             canvas.BeginText()
                   .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN), 14)
                   .SetFillColor(new DeviceRgb(42, 44, 62))
                   .MoveText(200, 540)
-                  .ShowText($"Illness: {voucher.Illness.Name}")
+                  .ShowText($"Type: {reciept.Type}")
                   .EndText();
 
             canvas.BeginText()
                   .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN), 14)
                   .SetFillColor(new DeviceRgb(42, 44, 62))
                   .MoveText(200, 520)
-                  .ShowText($"Patient: {voucher.Patient.FullName}")
+                  .ShowText($"Patient: {reciept.Voucher.Patient.FullName}")
                   .EndText();
 
             canvas.BeginText()
@@ -91,23 +84,20 @@ namespace Sanatorium.BLL.Services
             return stream.ToArray();
         }
 
-        public async Task<List<VoucherDto>> GetAllVouchers(CancellationToken cancellationToken)
+        public async Task<List<RecieptDto>> GetAll(CancellationToken cancellationToken)
         {
             var entities = await _repository.GetAll(cancellationToken);
             return _mapper.MapToDto(entities);
         }
 
-        public async Task<List<VoucherDto>> GetAllVouchersWithoutDoctors(CancellationToken cancellationToken)
+        public async Task<RecieptDto?> GetOneAsync(int id, CancellationToken cancellationToken)
         {
-            var entities = await _repository.GetAllVouchersWithoutDoctors(cancellationToken);
-            return _mapper.MapToDto(entities);
+            var entity = await _repository.GetOneAsync(id, cancellationToken);
+            if (entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+            return _mapper.MapToDto(entity);
         }
-
-        public async Task<List<VoucherDto>> GetAllVouchersWithoutProcedures(CancellationToken cancellationToken)
-        {
-            var entities = await _repository.GetAllVouchersWithoutProcedures(cancellationToken);
-            return _mapper.MapToDto(entities);
-        }
-      
     }
 }

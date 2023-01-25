@@ -22,14 +22,18 @@
 
 <table class="table table-bordered table-responsive table-hover border border-0 border-dark">
     <tr>
-        <th>Назва</th>
-        <th>Тип</th>
+        <th>Номер</th>
+        <th>Дата створення</th>
+        <th>Дата закінчення</th>
         <th>Редагувати</th>
         <th>Видалити</th>
     </tr>
     @foreach (var d in Model)
     {
         <tr>
+            <th>@d.Id</th>
+            <th>@d.CreationDate.Date.ToShortDateString()</th>
+            <th>@d.ExpirationDate.Date.ToShortDateString()</th>
             <td><a href="/Home/EditIllness/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-edit" style="font-size:24px"></i></a></td>
             <td><a href="/Home/DeleteIllness/@d.Id.ToString()" style="width: 50px" class="btn btn-danger"><i class="fa fa-trash-o" style="font-size:24px"></i></a></td>
         </tr>

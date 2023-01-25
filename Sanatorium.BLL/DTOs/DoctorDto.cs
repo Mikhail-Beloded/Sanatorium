@@ -1,6 +1,4 @@
-﻿using Sanatorium.DAL.Entities;
-
-namespace Sanatorium.BLL.DTOs
+﻿namespace Sanatorium.BLL.DTOs
 {
     public class DoctorDto : DtoBase
     {
@@ -14,6 +12,6 @@ namespace Sanatorium.BLL.DTOs
 
         public string Specialization { get; set; }
 
-        public List<VoucherDoctor> VoucherDoctors { get; set; }
+        public List<VoucherDto> Vouchers { get; set; }
     }
 }
