@@ -1,0 +1,41 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model List<RoomDto>
+
+@{
+    ViewData["Title"] = "Rooms Main Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="text-center">
+    <h1 class="display-4">Кімнати</h1>
+</div>
+
+<div class="d-flex justify-content-end">
+    <a href="/Home/AddRoom" class="btn rounded-circle btn-dark"><i class="fa fa-plus"></i></a>
+</div>
+
+<div>
+    <h1></h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Номер</th>
+        <th>Ціна</th>
+        <th>Вмістимість</th>
+        <th>Редагувати</th>
+        <th>Видалити</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+            <tr>
+                <td>@d.Id</td>
+                <td>@d.Price</td>
+                <td>@d.Capacity</td>
+                <td><a href="/Home/EditRoom/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-edit" style="font-size:24px"></i></a></td>
+                <td><a href="/Home/DeleteRoom/@d.Id.ToString()" style="width: 50px" class="btn btn-danger"><i class="fa fa-trash-o" style="font-size:24px"></i></a></td>
+            </tr>
+    }
+</table>

@@ -1,0 +1,39 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model List<VoucherDto>
+
+@{
+    ViewData["Title"] = "Generation Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="text-center">
+    <h1 class="display-4">Генерація направлення</h1>
+</div>
+
+<div>
+    <h1></h1>
+</div>
+
+<table class="table table-bordered table-responsive table-hover border border-0 border-dark">
+    <tr>
+        <th>Номер</th>
+        <th>Дата створення</th>
+        <th>Дата закінчення</th>
+        <th>Пацієнт</th>
+        <th>Хвороба</th>
+        <th>Генерувати</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+            <tr>
+                <th>@d.Id</th>
+                <th>@d.CreationDate.Date.ToShortDateString()</th>
+                <th>@d.ExpirationDate.Date.ToShortDateString()</th>
+                <th>@d.Patient.FullName</th>
+                <th>@d.Illness.Name</th>
+                <td><a href="/Home/SubmitGeneration/@d.Id.ToString()" style="width: 50px" class="btn btn-warning"><i class="fa fa-plus"></i></a></td>
+            </tr>
+    }
+</table>

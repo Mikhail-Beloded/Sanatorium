@@ -17,6 +17,13 @@ namespace Sanatorium.BLL
             services.AddDbContext<EFContext>(options => options.UseSqlServer(conectionString));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IStatisticsRepository, StatisticRepository>();
+            services.AddScoped<IVoucherRoomRepository, VoucherRoomRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IPatientRepositoy, PatientsRepository>();
+            services.AddScoped<IRecieptRepository, RecieptRepository>();
+            services.AddScoped<IVoucherRepository, VoucherRepository>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
 
             return services;
         }
@@ -24,6 +31,13 @@ namespace Sanatorium.BLL
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IVoucherService, VoucherService>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<IProcedureService, ProcedureService>();
+            services.AddScoped<IIllnessService, IllnessService>();
+            services.AddScoped<IRecieptService, RecieptService>();
 
             return services;
         }

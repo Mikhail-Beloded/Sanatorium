@@ -4,10 +4,20 @@
     {
         public DateTime CreationDate { get; set; }
 
-        public string Illness { get; set; }
-
-        public int DayCount { get; set; }
+        public DateTime ExpirationDate { get; set; }
 
         public Patient Patient { get; set; }
+
+        public Doctor? Doctor { get; set; }
+
+        public Illness Illness { get; set; }
+
+        public int IllnessDegree { get; set; }
+
+        public Reciept Reciept { get; set; }
+
+        public List<VoucherRoom> VoucherRooms { get; set; }
+
+        public List<VoucherProcedure> VoucherProcedures { get; set; }
     }
 }

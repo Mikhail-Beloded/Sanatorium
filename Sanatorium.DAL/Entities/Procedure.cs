@@ -6,10 +6,8 @@
 
         public int SessionPrice { get; set; }
 
-        public DateTime SessionTime { get; set; }
+        public int SessionMinutes { get; set; }
 
-        public List<ProcedureIllness> ProcedureIllness { get; set; }
-
-        public List<ProcedureReciept> ProcedureReciept { get; set; }
+        public List<VoucherProcedure> VoucherProcedures { get; set; }
     }
 }

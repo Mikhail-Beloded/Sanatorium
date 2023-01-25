@@ -1,0 +1,24 @@
+﻿@model SearchModel
+
+@{
+    ViewBag.Title = "Searching Patient Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<form asp-controller="Home" asp-action="SubmitSearchPatient" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Знайти пацієнта</h1>
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Content" type="text" placeholder="ПІБ" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

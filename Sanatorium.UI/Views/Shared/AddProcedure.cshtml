@@ -1,0 +1,33 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model ProcedureDto
+
+@{
+    ViewBag.Title = "Add Procedure Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form asp-controller="Home" asp-action="SubmitAddProcedure" method="post">
+<div class="text-center">
+    <h1 class="display-4">Додати процедуру</h1>
+</div>
+
+<div class="input-group">
+    <input asp-for="Name" type="text" placeholder="Назва процедури" class="form-control">
+</div>
+
+<div class="input-group">
+    <input asp-for="SessionPrice" type="number" class="form-control" placeholder="Ціна">
+</div>
+
+<div class="input-group">
+    <input asp-for="SessionMinutes" type="text" class="form-control" placeholder="Час минут">
+</div>
+
+<div class="mb-3">
+    <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+    </button>
+</div>
+</form>

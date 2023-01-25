@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Sanatorium.BLL\Sanatorium.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\NewFolder\" />
+  </ItemGroup>
+
 </Project>

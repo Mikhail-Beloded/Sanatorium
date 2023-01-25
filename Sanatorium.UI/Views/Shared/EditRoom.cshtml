@@ -1,0 +1,34 @@
+﻿@using Sanatorium.BLL.DTOs;
+
+@model RoomDto
+
+@{
+    ViewBag.Title = "Edit Room Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<form asp-controller="Home" asp-action="SubmitEditRoom" method="post">
+    <div class="text-center">
+        <h1 class="display-4">Редагувати кімнату</h1>
+    </div>
+
+    <div class="input-group">
+        <input hidden asp-for="Id" type="number" value="@Model.Id" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Price" type="number" value="@Model.Price" placeholder="Ціна" class="form-control">
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Capacity" type="number" value="@Model.Capacity" class="form-control" placeholder="Вмістимість">
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-dark">
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>
